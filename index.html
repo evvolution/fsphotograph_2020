@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>2020年度禅城绿摄影微视频征集大赛</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta name="renderer" content="webkit">
+    <meta name="referrer" content="never">
+    <link rel="stylesheet" type="text/css" href="plugins/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="plugins/fullpage/fullpage.min.css">
+    <link rel="stylesheet" type="text/css" href="plugins/fileinput/fileinput.min.css">
+    <link rel="stylesheet" type="text/css" href="plugins/litestep/step.css">
+
+    <link rel="stylesheet" type="text/css" href="control/css/basic.css">
+    <link rel="stylesheet" type="text/css" href="control/css/p1.css">
+    <link rel="stylesheet" type="text/css" href="control/css/p2.css">
+    <link rel="stylesheet" type="text/css" href="control/css/p3.css">
+    <link rel="stylesheet" type="text/css" href="control/css/p4.css">
+    <link rel="stylesheet" type="text/css" href="control/css/p5.css">
+    <link rel="stylesheet" type="text/css" href="control/css/p6.css">
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <ul class="fsnav" id="fsantidarkMenu">
+            <!-- <div class="goldenborder"></div> -->
+            <li><img src="img/basic/MENU.png"/></li>
+            <li data-menuanchor="p1" class="menulist" style="margin: 0"><a href="#p1">专题首页</a></li>
+            <li class="menulist_blank"><img src="img/basic/MENU_blank.png"/></li>
+            <li data-menuanchor="p2" class="menulist"><a href="#p2">大赛简介</a></li>
+            <li class="menulist_blank"><img src="img/basic/MENU_blank.png"/></li>
+            <li data-menuanchor="p3" class="menulist"><a href="#p3">我要报名</a></li>
+            <li class="menulist_blank"><img src="img/basic/MENU_blank.png"/></li>
+            <li data-menuanchor="p4" class="menulist"><a href="#p4">市民打卡</a></li>
+            <li class="menulist_blank"><img src="img/basic/MENU_blank.png"/></li>
+            <li data-menuanchor="p5" class="menulist"><a href="#p5">新闻动态</a></li>
+            <li class="menulist_blank"><img src="img/basic/MENU_blank.png"/></li>
+            <li data-menuanchor="p6" class="menulist"><a href="#p6">作品展示</a></li>
+            <li data-menuanchor="p1" class="menulist" style="background-color: transparent;"><a href="#p1"><img src="img/basic/top.png" /></a></li>
+        </ul>
+        <div id="fullpage">
+            <div class="section pageOne">
+                <div class="row p1row">
+                    <div class="titleContent col-lg-12">
+                        <img src="img/p1/title.png" />
+                        <div class="flashContent flash_left">
+                            <img src="img/p1/flash.png" />
+                        </div>
+                        <div class="flashContent flash_middle">
+                            <img src="img/p1/flash.png" />
+                        </div>
+                        <div class="flashContent flash_right">
+                            <img src="img/p1/flash.png" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row p1row">
+                    <div class="founderIntro"></div>
+                </div>
+            </div>
+            <div class="section pageTwo">
+                <div class="mainforp2">
+                    <div class="row p2row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-10">
+                            <img class="commonpicfortitle" style="width: 75%;" src="img/p2/p2title.png">
+                        </div>
+                        <div class="col-lg-1"></div>
+                    </div>
+                    <div class="row p2row">
+                        <div class="col-lg-12">
+                            <img src="img/p2/p2intro.png">
+                            <div class="moreintroforp2" onclick=formorebyPDF()>查看更多</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section pageThree">
+                <div class="mainforp3">
+                    <div class="row p3row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-10">
+                            <img class="commonpicfortitle" style="width: 75%;" src="img/p3/p3title.png">
+                        </div>
+                        <div class="col-lg-1"></div>
+                    </div>
+
+                    <div class="row p3row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-10 stepsforinfo">
+                            <div class="row p3rowlevel2">
+                                <div class="container"><br/>
+                                    <div class="row p3rowlevel3">
+                                        <p class="reqtitleinp3">在线报名</p>
+                                    </div>
+                                    <div class="row p3rowlevel3">
+                                        <p class="reqintroinp3">在线上传作品并填写下面信息，填写完毕后上传。</p>
+                                    </div>
+                                    <div class="row p3rowlevel3">
+                                        <div id="step"></div>
+                                    </div>
+                                    <div class="row p3rowlevel3">
+                                        <div class="lock"></div>
+                                        <div class="col-lg-6 offset-lg-3">
+                                            <form method="post" enctype="multipart/form-data" id="maininformation">
+                                                <div class="liteswitch boxTxt">
+                                                    <div class="box">
+                                                        <input name="exam_id" type="text" value="29" style="display: none;"/>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-3 infolabel">作品名称: </div>
+                                                            <div class="col-md-9"><input class="infotypein" name="title" id="prjname"/></div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-3 infolabel">上传作品: </div>
+                                                            <div class="col-md-9"><input id="prjvideo" name="ffile" type="file" /></div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-3 infolabel">视频类型: </div>
+                                                            <div class="col-md-9 prjtypeContent">
+                                                                <div class="row p3rowlevel5">
+                                                                    <div class="col-md prjtype">
+                                                                        <input checked class="prjtyperadio" type="radio" name="v_type" id="prjtype1" value="微视频">&nbsp;<label class="labelprjtype" for="prjtype1">微视频作品</label>
+                                                                    </div>
+                                                                    <div class="col-md prjtype">
+                                                                        <input class="prjtyperadio" type="radio" name="v_type" id="prjtype2" value="微电影">&nbsp;<label class="labelprjtype" for="prjtype2">摄影作品</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-3 infolabel">上传剧照: </div>
+                                                            <div class="col-md-9"><input id="prjcover" name="fimg" type="file" /></div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col"></div>
+                                                            <div class="col">
+                                                                <div class="preandnext" onclick=stepnext_1to2()>下一步 →</div>
+                                                            </div>
+                                                            <div class="col"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="box">
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-3 infolabel">报送单位: </div>
+                                                            <div class="col-md-9"><input class="infotypein" name="company_a" id="prjbelong" /></div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-3 infolabel">联系人: </div>
+                                                            <div class="col-md-9"><input class="infotypein" name="contact_person" id="prjcontact"/></div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-3 infolabel">联系方式: </div>
+                                                            <div class="col-md-9"><input class="infotypein" name="phone" id="prjphone"/></div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col"></div>
+                                                            <div class="col">
+                                                                <div class="preandnext" onclick=steppre()>← 上一步</div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="preandnext" onclick=stepnext_2to3()>下一步 →</div>
+                                                            </div>
+                                                            <div class="col"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="box">
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-3 infolabel">导演: </div>
+                                                            <div class="col-md-9"><input class="infotypein" name="director" id="prjdirector"/></div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-3 infolabel">编剧: </div>
+                                                            <div class="col-md-9"><input class="infotypein" name="screenwriter" id="prjwriter"/></div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-3 infolabel">摄像: </div>
+                                                            <div class="col-md-9"><input class="infotypein" name="photography" id="prjphotograph"/></div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-3 infolabel">剪辑: </div>
+                                                            <div class="col-md-9"><input class="infotypein" name="clip" id="prjredeal"/></div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col"></div>
+                                                            <div class="col">
+                                                                <div class="preandnext" onclick=steppre()>← 上一步</div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="preandnext" onclick=stepnext_3to4()>下一步 →</div>
+                                                            </div>
+                                                            <div class="col"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="box">
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-3 infolabel">演员: </div>
+                                                            <div class="col-md-9"><input class="infotypein" name="starring" id="prjactor"/></div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-5 infolabel">
+                                                                <div class="showmodal" data-toggle="modal" data-target="#prjmainmodal">作品梗概</div>
+                                                                <div class="finalsubmitted" style="display: none;">作品梗概</div>
+                                                            </div>
+                                                            <div class="shorttext col-md-7"><input class="infotypeNone" name="content_500" id="shortprjmain" readonly value="您还没有提交作品梗概"/></div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-5 infolabel">
+                                                                <div class="showmodal" data-toggle="modal" data-target="#prjverifymodal">作品简介</div>
+                                                                <div class="finalsubmitted" style="display: none;">作品简介</div>
+                                                            </div>
+                                                            <div class="shorttext col-md-7"><input class="infotypeNone" name="content" id="shortprjverify" readonly value="您还没有提交作品简介"/></div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col-md-12">
+                                                                <input class="prjread" type="checkbox" id="read">&nbsp;
+                                                                <label class="labelprjread" for="read">
+                                                                    本人已详细阅读并熟知本<a data-toggle="modal" data-target="#prjnotice"><strong>报名须知(点击查看)</strong></a>，并承诺严格遵守
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row p3rowlevel4">
+                                                            <div class="col"></div>
+                                                            <div class="col" id="finalpre">
+                                                                <div class="preandnext" onclick=steppre() >← 上一步</div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <!-- <button class="moreintroforp2" type="submit">提交</button> -->
+                                                                <div class="moreintroforp2" onclick=submitinfo() id="finalsubmit">提交</div>
+                                                                <div class="finalsubmitted" style="display: none;">已提交</div>
+                                                            </div>
+                                                            <div class="col"></div>
+                                                        </div>
+                                                    </div>       
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="guideforp3">
+                        <p class="guidetitleforp3"><strong>报名方式：</strong></p>
+                        <p class="guidecontentforp3">1. 作品分为摄影项目、微视频项目2大类。摄影作品以原图为主，单张最小不得少于2M，最大不得超过20M，允许对光暗，色彩进行简单的后期调整，但不得使用合成造假的方式；微视频时长不超过1分钟。</p>
+                        <p class="guidecontentforp3">2. 参赛作品必须由参赛者本人或者单位原创，确认拥有作品著作权，严禁剽窃、侵权、主办方不承担包括（不限于）肖像权、名誉权、隐私权、著作权、商标权等纠纷而产生的法律责任，如出现上述纠纷，将保留取消参赛资格及追回奖项的权利。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="mainforp4">
+                    <div class="row p4row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-10">
+                            <img class="commonpicfortitle" style="width: 75%;" src="img/p4/p4title.png">
+                        </div>
+                        <div class="col-lg-1"></div>
+                    </div>
+                    <div class="row p4row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-2"><img src="img/p4/p11.png" class="towhere" /></div>
+                        <div class="col-lg-2"><img src="img/p4/p12.png" class="towhere" /></div>
+                        <div class="col-lg-2"><img src="img/p4/p13.png" class="towhere" /></div>
+                        <div class="col-lg-2"><img src="img/p4/p14.png" class="towhere" /></div>
+                        <div class="col-lg-2"><img src="img/p4/p15.png" class="towhere" /></div>
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-2"><img src="img/p4/p21.png" class="towhere"></div>
+                        <div class="col-lg-2"><img src="img/p4/p22.png" class="towhere"></div>
+                        <div class="col-lg-2"><img src="img/p4/p23.png" class="towhere"></div>
+                        <div class="col-lg-2"><img src="img/p4/p24.png" class="towhere"></div>
+                        <div class="col-lg-2"><img src="img/p4/p25.png" class="towhere"></div>
+                        <div class="col-lg-1"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="mainforp5">
+                    <div class="row p5row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-10">
+                            <img class="commonpicfortitle" style="width: 75%;" src="img/p5/p5title-1.png">
+                        </div>
+                        <div class="col-lg-1"></div>
+                    </div>
+                    <div class="row p5row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-10">
+                            <img src="img/p5/p5intro.png">
+                        </div>
+                        <div class="col-lg-1"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="mainforp6">
+                    <div class="row p6row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-10">
+                            <img class="commonpicfortitle" style="width: 75%;" src="img/p6/p6title.png">
+                        </div>
+                        <div class="col-lg-1"></div>
+                    </div>
+                    <div class="row p6row">
+                        <div class="col-lg-12">
+                            <div class="btncontent">
+                                <div class="p5direct" onclick=liteswitchp5.prev()>&nbsp;←&nbsp;</div>
+                                <div class="p5direct" onclick=liteswitchp5.next()>&nbsp;→&nbsp;</div>
+                            </div>
+                            <div class="liteswitchp5 boxTxt oldprjs" id="oldprjs"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" id="prjmainmodal" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="prjmaintro" class="modaltitle col-form-label">作品梗概(500字以内，介绍作品内容)</label>
+                        <textarea class="modaltextarea form-control" id="prjmaintro" maxlength="500"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="postToshort('prjmaintro','shortprjmain','prjmainmodal')">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" id="prjverifymodal" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="prjverify" class="modaltitle col-form-label">作品简介(100字以内，用于宣传推广)</label>
+                        <textarea class="modaltextarea form-control" id="prjverify" maxlength="100"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="postToshort('prjverify','shortprjverify','prjverifymodal')">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" id="prjnotice" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="prjverify" class="modaltitle col-form-label">报名须知</label>
+                    </div>
+                    <div class="notices form-group">1.	所有参赛作品须为本单位（本人）原创，不能存在任何侵犯第三方权利的内容，不能违反法律法规的规定，且提供的关于作品的信息全部真实、有效。</div>
+                    <div class="notices form-group">
+                        2.	如果被选中专题活动作品刊登在"百项网络正能量专题活动"专题及其他传播平台中，产生任何纠纷，须由参赛单位（或联系人）承担责任。如给本网站造成任何损失，须由参赛单位（或联系人）向本网站进行赔偿。
+                    </div>
+                    <div class="notices form-group">3.	所有参赛作品授权市委政法委、市扫黑除恶办，均可在佛山+及其他传播平台上发布。</div>
+                    <div class="notices form-group">4.	本人/我司在充分理解并自愿接受比赛通知和评选规则的前提下参赛。</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="plugins/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="plugins/fullpage/fullpage.min.js"></script>
+    <script type="text/javascript" src="plugins/fileinput/fileinput.min.js"></script>
+    <script type="text/javascript" src="plugins/fileinput/zh.js"></script>
+    <script type="text/javascript" src="plugins/liteswitch/liteswitch3.js"></script>
+    <script type="text/javascript" src="plugins/liteswitch/liteswitch5.js"></script>
+    <script type="text/javascript" src="plugins/litestep/step.js"></script>
+    <script type="text/javascript" src="plugins/sweetalert/sweetalert.js"></script>
+    <script type="text/javascript" src="plugins/md5/md5.js"></script>
+
+    <script type="text/javascript" src="control/js/common.js"></script>
+    <script type="text/javascript" src="control/js/viewinit.js"></script>
+    <script type="text/javascript" src="control/js/p2.js"></script>
+    <script type="text/javascript" src="control/js/p3.js"></script>
+    <script type="text/javascript" src="control/js/p5.js"></script>
+</body>
+</html>
