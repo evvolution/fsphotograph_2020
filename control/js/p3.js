@@ -49,6 +49,45 @@ function steppre() {
     step.step("previous");
 }
 
+function inittype() {
+    $('input[name="v_type"]').change(function(e) {
+        var v_type = $("input[name='v_type']:checked").val();
+        if(v_type === "摄影作品") {
+            $("#forvideoprj").css("display", "none");
+            $("#forvideopostprj").html("上传作品：");
+
+            $("#prjdirector").val("无");
+            $("#prjwriter").val("无");
+            $("#prjphotograph").val("无");
+            $("#prjredeal").val("无");
+            $("#prjactor").val("无");
+
+            $("#prjdirector").attr("disabled","disabled");
+            $("#prjwriter").attr("disabled","disabled");
+            $("#prjphotograph").attr("disabled","disabled");
+            $("#prjredeal").attr("disabled","disabled");
+            $("#prjactor").attr("disabled","disabled");
+
+        }else {
+            
+            $("#forvideoprj").css("display", "flex");
+            $("#forvideopostprj").html("上传剧照：");
+
+            $("#prjdirector").val("");
+            $("#prjwriter").val("");
+            $("#prjphotograph").val("");
+            $("#prjredeal").val("");
+            $("#prjactor").val("")
+
+            $("#prjdirector").removeAttr("disabled");
+            $("#prjwriter").removeAttr("disabled");
+            $("#prjphotograph").removeAttr("disabled");
+            $("#prjredeal").removeAttr("disabled");
+            $("#prjactor").removeAttr("disabled");
+        }
+    })
+}
+
 function stepnext_1to2() {
 
     var title = $("#prjname").val().length;
@@ -60,7 +99,7 @@ function stepnext_1to2() {
         swal({title: "作品名称不可为空",icon: "error",});
         return;
     }
-    if (ffile === 0) {
+    if ((ffile === 0) && (v_type === "微视频作品")) {
         swal({title: "请上传作品文件",icon: "error",});
         return;
     }
@@ -94,6 +133,18 @@ function stepnext_2to3() {
 
     liteswitch.next()
     step.step("next");
+
+    var v_type = $("input[name='v_type']:checked").val();
+    if(v_type === "摄影作品") {
+        swal({
+            title: "您无需填写本页内容",
+            icon: "warning",
+            closeOnClickOutside: false,
+        }).then(done=>{
+            liteswitch.next()
+            step.step("next");
+        });
+    }
 }
 
 function stepnext_3to4() {
@@ -210,11 +261,11 @@ function submitinfo() {
 
         // dataType:"json",
         success:function(receiver){
-            // console.log(receiver);
+            console.log(receiver);
             var success_id = receiver.data.id;
-            // console.log(success_id);
+            console.log(success_id);
             var strid = success_id.toString();
-            // console.log(strid);
+            console.log(strid);
             var strid_md5 = strid.MD5().toLocaleUpperCase();
             // console.log(strid_md5);
             swal({

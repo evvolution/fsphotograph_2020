@@ -62,7 +62,7 @@
 .oldprjtitle {
     margin: 0.5vw 0;
     font-size: .6vw;
-    color: whitesmoke;
+    color: #31a242;
 }
 
 .p5direct {
@@ -79,7 +79,7 @@
 
 .btncontent {
     position: absolute;
-    bottom: -20px;
+    bottom: -90px;
     left: 0;
     right: 0;
 }

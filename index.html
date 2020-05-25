@@ -111,23 +111,24 @@
                                                             <div class="col-md-9 prjtypeContent">
                                                                 <div class="row p3rowlevel5">
                                                                     <div class="col-md prjtype">
-                                                                        <input checked class="prjtyperadio" type="radio" name="v_type" id="prjtype1" value="微视频">&nbsp;<label class="labelprjtype" for="prjtype1">微视频作品</label>
+                                                                        <input checked class="prjtyperadio" type="radio" name="v_type" id="prjtype1" value="微视频作品">&nbsp;<label class="labelprjtype" for="prjtype1">微视频作品</label>
                                                                     </div>
                                                                     <div class="col-md prjtype">
-                                                                        <input class="prjtyperadio" type="radio" name="v_type" id="prjtype2" value="微电影">&nbsp;<label class="labelprjtype" for="prjtype2">摄影作品</label>
+                                                                        <input class="prjtyperadio" type="radio" name="v_type" id="prjtype2" value="摄影作品">&nbsp;<label class="labelprjtype" for="prjtype2">摄影作品</label>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row p3rowlevel4">
+                                                        <div class="row p3rowlevel4" id="forvideoprj">
                                                             <div class="col-md-3 infolabel">上传作品: </div>
                                                             <div class="col-md-9"><input id="prjvideo" name="ffile" type="file" /></div>
                                                         </div>
 
                                                         <div class="row p3rowlevel4">
-                                                            <div class="col-md-3 infolabel">上传剧照: </div>
+                                                            <div class="col-md-3 infolabel" id="forvideopostprj">上传剧照: </div>
                                                             <div class="col-md-9"><input id="prjcover" name="fimg" type="file" /></div>
                                                         </div>
+
                                                         <div class="row p3rowlevel4">
                                                             <div class="col"></div>
                                                             <div class="col">
@@ -219,16 +220,15 @@
                                                             </div>
                                                         </div>
                                                         <div class="row p3rowlevel4">
-                                                            <div class="col"></div>
-                                                            <div class="col" id="finalpre">
-                                                                <div class="preandnext" onclick=steppre() >← 上一步</div>
+                                                            <!-- <div class="col"></div> -->
+                                                            <div class="col">
+                                                                <div id="finalpre" class="preandnext" onclick=steppre() >← 上一步</div>
                                                             </div>
                                                             <div class="col">
-                                                                <!-- <button class="moreintroforp2" type="submit">提交</button> -->
-                                                                <div class="moreintroforp2" onclick=submitinfo() id="finalsubmit">提交</div>
+                                                                <div class="preandnext" onclick=submitinfo() id="finalsubmit">提交</div>
                                                                 <div class="finalsubmitted" style="display: none;">已提交</div>
                                                             </div>
-                                                            <div class="col"></div>
+                                                            <!-- <div class="col"></div> -->
                                                         </div>
                                                     </div>       
                                                 </div>
@@ -270,7 +270,7 @@
             <div class="section pagefive">
                 <div class="mainforp5">
                     <div class="row p5row">
-                        <div class="col-lg-10 offset-lg-1"><img class="commonpicfortitle" style="width: 75%;" src="img/p5/p5title-1.png"></div>
+                        <div class="col-lg-10 offset-lg-1"><img class="commonpicfortitle" style="width: 75%;" src="img/p5/p5title.png"></div>
                     </div>
                     <div class="row p5row">
                         <div class="col-lg-10 offset-lg-1"><img src="img/p5/p5intro.png"></div>

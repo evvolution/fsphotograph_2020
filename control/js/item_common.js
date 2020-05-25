@@ -32,7 +32,7 @@ function init() {
                 }
             }
             $("#title").html(title);
-            var tmp = '<video src="' + video + '" poster="' + poster + '" controls></video>';
+            var tmp = '<video src="' + video + '" poster="' + poster + '" controls style="max-width:1000px"></video>';
             $("#player").html(tmp);
             $("#company").html('申报单位：' + company);
             $("#brief").html('内容简介：' + brief);

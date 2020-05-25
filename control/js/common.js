@@ -13,7 +13,8 @@ $(document).ready(function() {
     initFile();
     initLiteswitchp3();
     initLitestep();
-
+    
+    inittype();
     getoldprjs();
 });
 
