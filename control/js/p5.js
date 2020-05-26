@@ -6,7 +6,7 @@
 function getoldprjs() {
     $.ajax({
         type:"get",
-        url: commonlink + 'exam/get_vote/?exam_id=34',
+        url: commonlink + 'exam/get_vote/?exam_id=37',
         success:function(receiver){
             // console.log(receiver.projects[0]);
 
@@ -30,11 +30,10 @@ function getoldprjs() {
                     var inneritem = "";
                     for(var j = 6*i; j < 6*(i + 1); j++) {
                         let line1 = '<div class="col-md-4 oldprjitem"><div class="oldprjcover">';
-                        let url = 'oldvideoitem.html?id=' + receiver.projects[0][j].id;
-                        let line2 = '<a href="' + url + '" target="_blank">';
-                        let line3 = '<img src="' + receiver.projects[0][j].pic_url + '"/></a></div>';
-                        let line4 = '<div class="oldprjtitle">' + receiver.projects[0][j].title + '</div></div>';
-                        inneritem += (line1 + line2 +line3 +line4);
+                        let line2 = '<a href="' + receiver.projects[0][j].url + '" target="_blank">';
+                        let line3 = '<img class="zoomimg" src="' + receiver.projects[0][j].pic_url + '"/></a>';
+                        let line4 = '<div class="p6picauthor">' + receiver.projects[0][j].title + '</div><div class="p6pictitle">' + receiver.projects[0][j].item_id + '</div></div></div>'
+                        inneritem += (line1 + line2 + line3 + line4);
                     }
                     var tail = '</div></div>';
                     inner += (title + inneritem + tail);
@@ -48,20 +47,18 @@ function getoldprjs() {
                     if(i != (countall_boxNum - 1)) {
                         for(var j = 6*i; j < 6*(i + 1); j++) {
                             let line1 = '<div class="col-md-4 oldprjitem"><div class="oldprjcover">';
-                            let url = 'oldvideoitem.html?id=' + receiver.projects[0][j].id;
-                            let line2 = '<a href="' + url + '" target="_blank">';
-                            let line3 = '<img src="' + receiver.projects[0][j].pic_url + '"/></a></div>';
-                            let line4 = '<div class="oldprjtitle">' + receiver.projects[0][j].title + '</div></div>';
-                            inneritem += (line1 + line2 +line3 +line4);
+                            let line2 = '<a href="' + receiver.projects[0][j].url + '" target="_blank">';
+                            let line3 = '<img class="zoomimg" src="' + receiver.projects[0][j].pic_url + '"/></a>';
+                            let line4 = '<div class="p6picauthor">' + receiver.projects[0][j].title + '</div><div class="p6pictitle">' + receiver.projects[0][j].item_id + '</div></div></div>'
+                            inneritem += (line1 + line2 + line3 + line4);
                         }
                     } else {
                         for(var k = 6*i; k < countall; k++) { //这里循环结束以整个实际长度为准
                             let line1 = '<div class="col-md-4 oldprjitem"><div class="oldprjcover">';
-                            let url = 'oldvideoitem.html?id=' + receiver.projects[0][k].id;
-                            let line2 = '<a href="' + url + '" target="_blank">';
-                            let line3 = '<img src="' + receiver.projects[0][k].pic_url + '"/></a></div>';
-                            let line4 = '<div class="oldprjtitle">' + receiver.projects[0][k].title + '</div></div>';
-                            inneritem += (line1 + line2 +line3 +line4);
+                            let line2 = '<a href="' + receiver.projects[0][k].url + '" target="_blank">';
+                            let line3 = '<img class="zoomimg" src="' + receiver.projects[0][k].pic_url + '"/></a>';
+                            let line4 = '<div class="p6picauthor">' + receiver.projects[0][k].title + '</div><div class="p6pictitle">' + receiver.projects[0][k].item_id + '</div></div></div>'
+                            inneritem += (line1 + line2 + line3 + line4);
                         }
                     }
                     var tail = '</div></div>';
@@ -75,6 +72,7 @@ function getoldprjs() {
                 startIndex: 0,//起始滑块的索引（从零开始）
                 draggable: false,//使用拖动和触摸滑动
             });
+
         },
         error: function(receiver){
             console.log(receiver);
@@ -85,4 +83,15 @@ function getoldprjs() {
             return;
         }
     });
+}
+
+
+function initZoom() {
+    var zooming = new Zooming({
+        customSize: {
+            width: 960,
+            height: 540
+        }
+    });
+    zooming.listen('.zoomimg');
 }

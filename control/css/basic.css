@@ -28,7 +28,7 @@ body {
 }
 
 .fp-tableCell {
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 .form-control,.btn {
@@ -91,7 +91,37 @@ body {
     text-align: center !important;
 }
 
+.list-group-item {
+    background: transparent;
+    padding: 1vw 1vw;
+    border: 0;
+    border-bottom: 1px solid gray;
+}
+
+.list-group-item a {
+    text-decoration: none;
+    color: #000;
+}
+
+.list-group-item:last-child {
+    border-bottom: 0;
+    border-radius: 0;
+}
+
+.commontitlecontentpage1 {
+    position: absolute;
+    top: 10%;
+}
+
+.commontitlecontent {
+    margin-bottom: 1vw;
+}
+
 .commonpicfortitle {
+    width: 75%
+}
+
+.commonpicforintro {
     width: 100%
 }
 
@@ -100,6 +130,8 @@ body {
     align-items: center; /*子元素垂直居中*/
     display: -webkit-flex;
 }
+
+
 
 .fsnav {
     position: absolute;

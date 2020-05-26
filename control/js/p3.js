@@ -54,7 +54,7 @@ function inittype() {
         var v_type = $("input[name='v_type']:checked").val();
         if(v_type === "摄影作品") {
             $("#forvideoprj").css("display", "none");
-            $("#forvideopostprj").html("上传作品：");
+            $("#forvideopostprj").html("上传作品: ");
 
             $("#prjdirector").val("无");
             $("#prjwriter").val("无");
@@ -71,7 +71,7 @@ function inittype() {
         }else {
             
             $("#forvideoprj").css("display", "flex");
-            $("#forvideopostprj").html("上传剧照：");
+            $("#forvideopostprj").html("上传封面: ");
 
             $("#prjdirector").val("");
             $("#prjwriter").val("");
@@ -104,7 +104,7 @@ function stepnext_1to2() {
         return;
     }
     if (fimg === 0) {
-        swal({title: "请上传作品剧照",icon: "error",});
+        swal({title: "请上传作品封面",icon: "error",});
         return;
     }
 
@@ -117,6 +117,7 @@ function stepnext_2to3() {
     var company_a = $("#prjbelong").val().length;
     var contact_person = $("#prjcontact").val().length;
     var phone = $("#prjphone").val().length;
+    var identify_id = $("#prjidentify").val().length;
 
     if (company_a === 0) {
         swal({title: "请填写报送单位",icon: "error",});
@@ -128,6 +129,10 @@ function stepnext_2to3() {
     }
     if (phone === 0) {
         swal({title: "请填写联系方式",icon: "error",});
+        return;
+    }
+    if (identify_id === 0) {
+        swal({title: "请填写身份证号",icon: "error",});
         return;
     }
 
@@ -254,6 +259,7 @@ function submitinfo() {
         processData: false,
         contentType: false,
         url: commonlink + 'hei_up',
+        // url: 'http://172.16.20.17:8000/hei_up',
         data: formall,
         //****************
         // data: {"exam_id":exam_id, "title": title, 'ffile':ffile, 'v_type': v_type, 'fimg': fimg, 'company_a': company_a, 'contact_person': contact_person, 'phone': phone, 'director': director, 'screenwriter': screenwriter, 'photography': photography, 'clip': clip, 'starring': starring, 'content_500': content_500, 'content': content,},
@@ -263,9 +269,9 @@ function submitinfo() {
         success:function(receiver){
             console.log(receiver);
             var success_id = receiver.data.id;
-            console.log(success_id);
+            // console.log(success_id);
             var strid = success_id.toString();
-            console.log(strid);
+            // console.log(strid);
             var strid_md5 = strid.MD5().toLocaleUpperCase();
             // console.log(strid_md5);
             swal({
@@ -276,7 +282,7 @@ function submitinfo() {
                 content: {
                     element: "img",
                     attributes: {
-                        src: "././img/basic/download.png",
+                        src: "http://img.foshanplus.com/2020/pic/chan/basic/download.png",
                     },
                     element: "img",
                 },

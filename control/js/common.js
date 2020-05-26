@@ -5,7 +5,7 @@
 */
 
 var step = $("#step");
-var commonlink = 'http://server3.foshanplus.com/';
+var commonlink = 'https://server3.foshanplus.com/';
 
 $(document).ready(function() {
     initMainview()
@@ -13,7 +13,9 @@ $(document).ready(function() {
     initFile();
     initLiteswitchp3();
     initLitestep();
-    
+    initModals();
+    initZoom();
+
     inittype();
     getoldprjs();
 });
