@@ -5,7 +5,10 @@
 */
 
 var step = $("#step");
-var commonlink = 'https://server3.foshanplus.com/';
+var commonlink = 'https://server.foshanplus.com/';
+
+var video_name_toupload = "";
+var pic_name_toupload = ""
 
 $(document).ready(function() {
     initMainview()
@@ -14,8 +17,10 @@ $(document).ready(function() {
     initLiteswitchp3();
     initLitestep();
     initModals();
-    initZoom();
-
+    initnews();
+    uploadx_btn();
+    uploads_btn();
+    
     inittype();
     getoldprjs();
 });

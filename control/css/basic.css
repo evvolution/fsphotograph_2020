@@ -96,6 +96,7 @@ body {
     padding: 1vw 1vw;
     border: 0;
     border-bottom: 1px solid gray;
+    text-align: left;
 }
 
 .list-group-item a {
@@ -169,4 +170,25 @@ body {
 .fsnav .active {
     color: #000;
     background-color: #0d4313;
+}
+
+.notice_download {
+    position: relative;
+    margin-top: 10px;
+    z-index: 999;
+    bottom: 0;
+    width: 140px;
+    height: 140px;
+}
+
+.notice_download img { 
+    width: 100%;
+}
+
+.notice_download p {
+    margin-top: 1px;
+    background: #207329;
+    color: #fffdde;
+    font-size: 16px;
+    font-weight: 900;
 }
