@@ -4,37 +4,6 @@
     anthor：zx
 */
 
-function initFile() {
-    // $("#prjvideo").fileinput({
-    //     language: "zh",//配置语言
-    //     showUpload : false, //显示整体上传的按钮
-    //     showRemove : false, //显示整体删除的按钮
-    //     uploadAsync: true, //默认异步上传
-    //     dropZoneEnabled: false,
-    //     showPreview: false,
-    //     maxFileSize : 2097152,//文件大小限制
-    //     maxFileCount: 100,//允许最大上传数，可以多个，
-    //     enctype: 'multipart/form-data',
-    //     allowedFileExtensions : ["mov", "mp4", "mpeg"],/*上传文件格式限制*/
-    //     msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
-    //     // uploadUrl: commonlink + 'hei_up',
-    // });
-
-    // $("#prjcover").fileinput({
-    //     language: "zh",//配置语言
-    //     showUpload : false, //显示整体上传的按钮
-    //     showRemove : false, //显示整体删除的按钮
-    //     uploadAsync: true, //默认异步上传
-    //     uploadLabel: "上传", //设置整体上传按钮的汉字
-    //     dropZoneEnabled: false,
-    //     showPreview: false,
-    //     maxFileSize : 2097152,//文件大小限制
-    //     maxFileCount: 100,//允许最大上传数，可以多个，
-    //     enctype: 'multipart/form-data',
-    //     allowedFileExtensions : ["png", "jpg"],/*上传文件格式限制*/
-    //     msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
-    // });
-}
 
 function initLiteswitchp3() {
     liteswitch = new liteswitch({//下面要用到，就要声明为全局变量
@@ -90,23 +59,92 @@ function inittype() {
 
 function stepnext_1to2() {
 
-    // var title = $("#prjname").val().length;
-    // var ffile = $("#prjvideo")[0].files.length;
-    // var v_type = $("input[name='v_type']:checked").val();
-    // var fimg = $("#prjcover")[0].files.length;
+    var title = $("#prjname").val().length;
+    var v_type = $("input[name='v_type']:checked").val();
+    var isVideoUploadedSuccess = $("#video_name_target_id").val();
+    var isPicUploadedSuccess = $("#pic_name_target_id").val();
 
-    // if (title === 0) {
-    //     swal({title: "作品名称不可为空",icon: "error",});
-    //     return;
-    // }
-    // if ((ffile === 0) && (v_type === "微视频作品")) {
-    //     swal({title: "请上传作品文件",icon: "error",});
-    //     return;
-    // }
-    // if (fimg === 0) {
-    //     swal({title: "请上传作品封面",icon: "error",});
-    //     return;
-    // }
+    var error1 = "";
+    var error2 = "";
+
+    if (title === 0) {
+        swal({title: "作品名称不可为空",icon: "error",});
+        return;
+    }
+    if ((isVideoUploadedSuccess.length === 0) && (v_type === "微视频作品")) {
+        swal({title: "请上传作品文件",icon: "error",});
+        return;
+    }else {
+        // console.log(isVideoUploadedSuccess)
+        // console.log(video_name_toupload)
+        // console.log(video_type_toupload)
+        $.ajax({
+            type: "get",
+            url: commonlink + 'upload_complete?exam_id=32&task_id=' + isVideoUploadedSuccess + '&filename=' + video_name_toupload + '&type=' + video_type_toupload,
+            // url: 'http://172.16.20.17:8000/upload_complete?exam_id=29&task_id=' + isVideoUploadedSuccess + '&filename=' + video_name_toupload + '&type=' + video_type_toupload,
+            success:function(receiver){
+                console.log(receiver);
+                // alert(1)
+                $("#videofinalname").val(receiver.file_name);
+            },
+            error: function(receiver){
+                console.log(receiver);
+                swal({
+                    title: "当前人数过多，请稍后重试",
+                    icon: "error",
+                });
+                error1 = "1";
+                return;
+            }
+        });
+    }
+    
+    if (isPicUploadedSuccess.length === 0) {
+        swal({title: "请上传图片",icon: "error",});
+        return;
+    }else {
+        // console.log(isPicUploadedSuccess)
+        // console.log(pic_name_toupload)
+        // console.log(pic_type_toupload)
+        $.ajax({
+            type: "get",
+            url: commonlink + 'upload_complete?exam_id=32&task_id=' + isPicUploadedSuccess + '&filename=' + pic_name_toupload + '&type=' + pic_type_toupload,
+            // url: 'http://172.16.20.17:8000/upload_complete?exam_id=29&task_id=' + isPicUploadedSuccess + '&filename=' + pic_name_toupload + '&type=' + pic_type_toupload,
+            success:function(receiver){
+                console.log(receiver);
+                // alert(1)
+                $("#picfinalname").val(receiver.file_name);
+            },
+            error: function(receiver){
+                console.log(receiver);
+                swal({
+                    title: "当前人数过多，请稍后重试",
+                    icon: "error",
+                });
+                error2 = "1";
+                return;
+            }
+        });
+    }
+
+
+    if (error1 === "1") {
+        swal({
+            title: "当前人数过多，请稍后重试",
+            icon: "error",
+        });
+        console.log("video文件target_id获取失败");
+        return;
+    }
+
+    if (error2 === "1") {
+        swal({
+            title: "当前人数过多，请稍后重试",
+            icon: "error",
+        });
+        console.log("pic文件target_id获取失败");
+        return;
+    }
 
     liteswitch.next()
     step.step("next");
@@ -119,22 +157,22 @@ function stepnext_2to3() {
     var phone = $("#prjphone").val().length;
     var identify_id = $("#prjidentify").val().length;
 
-    // if (company_a === 0) {
-    //     swal({title: "请填写报送单位",icon: "error",});
-    //     return;
-    // }
-    // if (contact_person === 0) {
-    //     swal({title: "请填写联系人",icon: "error",});
-    //     return;
-    // }
-    // if (phone === 0) {
-    //     swal({title: "请填写联系方式",icon: "error",});
-    //     return;
-    // }
-    // if (identify_id === 0) {
-    //     swal({title: "请填写身份证号",icon: "error",});
-    //     return;
-    // }
+    if (company_a === 0) {
+        swal({title: "请填写报送单位",icon: "error",});
+        return;
+    }
+    if (contact_person === 0) {
+        swal({title: "请填写联系人",icon: "error",});
+        return;
+    }
+    if (phone === 0) {
+        swal({title: "请填写联系方式",icon: "error",});
+        return;
+    }
+    if (identify_id === 0) {
+        swal({title: "请填写身份证号",icon: "error",});
+        return;
+    }
 
     liteswitch.next()
     step.step("next");
@@ -159,22 +197,22 @@ function stepnext_3to4() {
     var photography = $("#prjphotograph").val().length;
     var clip = $("#prjredeal").val().length;
 
-    // if (director === 0) {
-    //     swal({title: "请填写导演",icon: "error",});
-    //     return;
-    // }
-    // if (screenwriter === 0) {
-    //     swal({title: "请填写编剧",icon: "error",});
-    //     return;
-    // }
-    // if (photography === 0) {
-    //     swal({title: "请填写摄像",icon: "error",});
-    //     return;
-    // }
-    // if (clip === 0) {
-    //     swal({title: "请填写剪辑",icon: "error",});
-    //     return;
-    // }
+    if (director === 0) {
+        swal({title: "请填写导演",icon: "error",});
+        return;
+    }
+    if (screenwriter === 0) {
+        swal({title: "请填写编剧",icon: "error",});
+        return;
+    }
+    if (photography === 0) {
+        swal({title: "请填写摄像",icon: "error",});
+        return;
+    }
+    if (clip === 0) {
+        swal({title: "请填写剪辑",icon: "error",});
+        return;
+    }
 
     liteswitch.next()
     step.step("next");
@@ -212,31 +250,31 @@ function submitinfo() {
     var content = $("#shortprjverify").val();
     var read = $("#read").is(":checked");
 
-    // if (starring === 0) {
-    //     swal({title: "请填写演员",icon: "error",});
-    //     return;
-    // }
-    // if (content_500 === '您还没有提交作品梗概') {
-    //     swal({title: "请填写作品梗概",icon: "error",});
-    //     return;
-    // }
-    // if (content === '您还没有提交作品简介') {
-    //     swal({title: "请填写作品简介",icon: "error",});
-    //     return;
-    // }
-    // if (read === false) {
-    //     swal({title: "请阅读活动规则后勾选",icon: "error",});
-    //     return;
-    // }
+    if (starring === 0) {
+        swal({title: "请填写演员",icon: "error",});
+        return;
+    }
+    if (content_500 === '您还没有提交作品梗概') {
+        swal({title: "请填写作品梗概",icon: "error",});
+        return;
+    }
+    if (content === '您还没有提交作品简介') {
+        swal({title: "请填写作品简介",icon: "error",});
+        return;
+    }
+    if (read === false) {
+        swal({title: "请阅读活动规则后勾选",icon: "error",});
+        return;
+    }
 
     var formall = new FormData(document.getElementById("maininformation"));
     $.ajax({
         type:"post",
         async: true,
         processData: false,
-        contentType: 'application/octet-stream',
-        url: commonlink + 'hei_up',
-        // url: 'http://172.16.20.17:8000/hei_up',
+        contentType: false,
+        url: commonlink + 'big_hei_up',
+        // url: 'http://172.16.20.17:8000/big_hei_up',
         data: formall,
         xhr: function() {                        
             myXhr = $.ajaxSettings.xhr();
@@ -306,29 +344,43 @@ function submitinfo() {
 function uploadx_btn() {
     $.fcup({
         upId: 'uploadx', //上传dom的id
-        upShardSize: '100', //切片大小,(单次上传最大值)单位M，默认2M
-        upMaxSize: '1000', //上传文件大小,单位M，不设置不限制
+        upShardSize: '5', //切片大小,(单次上传最大值)单位M，默认2M
+        upMaxSize: '2000', //上传文件大小,单位M，不设置不限制
 
-        // upUrl: 'https://server.foshanplus.com/file_upload', //文件上传接口
-        upUrl: 'http://172.16.20.17:8000/file_upload', //文件上传接口
+        upUrl: 'https://server.foshanplus.com/file_upload', //文件上传接口
+        // upUrl: 'http://172.16.20.17:8000/file_upload', //文件上传接口
   
         upType: 'mov,mp4', //上传类型检测,用,号分割
   
         //接口返回结果回调，根据结果返回的数据来进行判断，可以返回字符串或者json来进行判断处理
         upCallBack: function (res) {
 
-            console.log(res)
-            console.log(video_name_toupload)
+            // console.log(res)
+            // console.log(video_name_toupload)
+            // console.log(video_type_toupload)
             var msg = res.msg;
             var target_id = res.target_id;
             if(msg === "成功") {
-                $("#video_process_modal").modal("hide");
-                $("#uploaded_video_name").html(video_name_toupload);
+
+
+                //把上传成功的文件名显示在页面span中
+                $("#uploaded_video_name").val(video_name_toupload);
+                //把上传成功的文件类型存在页面隐藏input中
+                $("#uploaded_video_type").html(video_type_toupload);
+
+                //改变上传按钮的颜色并且使其禁用x
                 $(".bigfile_btn").css("background-color", "#a6aba6");
                 $("#uploadx_input").prop("disabled", true);
+                // $("#bigfile_btn_execUpload").css("background-color", "#a6aba6");
+                // $("#bigfile_btn_execUpload").removeAttr("onclick","do_exec_upload()");
 
+                // $("#bigfile_btn_cancelUpload").removeAttr("onclick","do_cancel()");
+                // $("#bigfile_btn_cancelUpload").css("background-color", "#a6aba6");
+                // $("#bigfile_btn_cancelUpload").css("border-right", "1px solid #feed4d");
+                // $("#bigfile_btn_cancelUpload").prop("disabled", true);
+
+                //把文件获取的target_id存放在隐藏的input中
                 $("#video_name_target_id").val(target_id);
-                $("#UploadBIGsuccee_modal").modal("show");
 
             } else {
                 alert("当前访问人数过多,请稍后重试");
@@ -338,19 +390,31 @@ function uploadx_btn() {
   
         // 上传过程监听，可以根据当前执行的进度值来改变进度条
         upEvent: function (num) {
-            $("#video_process_modal_num").css("width", num + '%');
+            var p = toPercent(num);
+            // console.log(p)
             $("#video_process_modal").modal("show");
+            $("#video_process_modal_num").css("width", p);
+            if(num === 100){
+                $("#video_process_modal").modal("hide");
+                setTimeout(function(){ 
+                    $("#UploadBIGsuccee_modal").modal("show"); 
+                }, 500);
+            }
         },
   
         // 发生错误后的处理
         upStop: function (errmsg) {
-            alert(errmsg + '请刷新后重试');
+            console.log(errmsg)
+            swal({
+                title: "访问人数过多，请重试",
+                icon: "error",
+            });
             return;
         },
   
         // 开始上传前的处理和回调,比如进度条初始化等
-        upStart: function () {
-
+        upStart: function () { 
+            
         }
     });
 }
@@ -360,49 +424,218 @@ function uploads_btn() {
         upId_pic: 'uploads', //上传dom的id
         upShardSize_pic: '2', //切片大小,(单次上传最大值)单位M，默认2M
         upMaxSize_pic: '20', //上传文件大小,单位M，不设置不限制
-        // upUrl: 'https://server.foshanplus.com/file_upload', //文件上传接口
-        upUrl_pic: 'http://172.16.20.17:8000/file_upload', //文件上传接口
+        upUrl_pic: 'https://server.foshanplus.com/file_upload', //文件上传接口
+        // upUrl_pic: 'http://172.16.20.17:8000/file_upload', //文件上传接口
         upType_pic: 'jpg,jpeg,raw', //上传类型检测,用,号分割
 
-        //接口返回结果回调，根据结果返回的数据来进行判断，可以返回字符串或者json来进行判断处理
         upCallBack_pic: function (res) {
-            console.log(res)
-            console.log(pic_name_toupload)
+            // console.log(res)
             var msg = res.msg;
             var target_id = res.target_id;
             if(msg === "成功") {
-                $("#pic_process_modal").modal("hide");             
-                $("#uploaded_pic_name").html(pic_name_toupload);
+           
+                //把上传成功的文件名显示在页面input中-图片文件
+                $("#uploaded_pic_name").val(pic_name_toupload);
+                //把上传成功的文件类型存在页面隐藏input中-图片文件
+                $("#uploaded_pic_type").html(pic_type_toupload);
+
+                //改变"上传"按钮的颜色并且使其禁用-图片文件
                 $(".bigfile_btn_pic").css("background-color", "#a6aba6");
                 $("#uploads_input").prop("disabled", true);
-
+                //把文件获取的target_id存放在隐藏的input中-图片文件
                 $("#pic_name_target_id").val(target_id);
-                $("#UploadBIGsuccee_modal").modal("show");
 
             } else {
                 alert("当前访问人数过多,请稍后重试");
                 return;
             }
 
-
         },
   
-        // 上传过程监听，可以根据当前执行的进度值来改变进度条
         upEvent_pic: function (num) {
-            $("#pic_process_modal_num").css("width", num + '%');
+            var p = toPercent(num);
+            // console.log(p)
             $("#pic_process_modal").modal("show");
+            $("#pic_process_modal_num").css("width", p);
+            if(num === 100){
+                $("#pic_process_modal").modal("hide");
+                setTimeout(function(){ 
+                    $("#UploadBIGsuccee_modal").modal("show"); 
+                }, 500);
+            }
         },
   
         // 发生错误后的处理
         upStop_pic: function (errmsg) {
-           // 这里只是简单的alert一下结果，可以使用其它的弹窗提醒插件
-            alert(errmsg);
+            console.log(errmsg)
+            swal({
+                title: "访问人数过多，请重试",
+                icon: "error",
+            });
+            return;
         },
   
         // 开始上传前的处理和回调,比如进度条初始化等
         upStart_pic: function () {
-            // alert('开始上传');
+            
         }
   
-     });
+    });
+}
+
+
+/* pic */
+function do_execPic_upload() {
+    // console.log(pic_size_toupload)
+    var result = getFileinfomation_pic();
+    if(result != "checkedpic") {
+        swal({
+            title: "请选择正确的文件",
+            icon: "error",
+        });
+        return;
+    }
+    jQuery.fcup_upload_pic()
+}
+
+function getFileinfomation_pic() {
+    var picfile = document.getElementById("uploads_input").files;
+    // console.log("1111", picfile)
+    // console.log(picfile);
+    //校验是否存在文件
+    if(picfile.length === 0){
+        swal({
+            title: "请上传或刷新页面后重试",
+            icon: "error",
+        });
+        return;
+    }else if (picfile.length != 1) {
+        swal({
+            title: "您只可以上传一个文件",
+            icon: "error",
+        });
+        return;
+    }
+    var picfile_type = picfile[0].type.split("/")[1]; //文件类型JPG,JPEG,RAW
+    var picfile_size = picfile[0].size / 1024 / 1024; //文件大小MB
+    var picfile_name = picfile[0].name;
+    $("#uploaded_pic_name").val(picfile_name);
+
+    if (!((picfile_type === "jpg") || (picfile_type === "JPG") || (picfile_type === "jpeg") || (picfile_type === "JPEG") || (picfile_type === "raw") || (picfile_type === "RAW"))) {
+        swal({
+            title: "只允许上传jpg,jpeg或raw格式的文件",
+            icon: "error",
+        });
+        $("#uploads_input").val("");
+        $("#uploaded_pic_name").val("");
+        return;
+    }
+    
+    if ((picfile_size < 2) || (picfile_size > 20)) {
+        swal({
+            title: "文件大小需在2M-20M之间",
+            icon: "error",
+        });
+        $("#uploads_input").val("");
+        $("#uploaded_pic_name").val("");
+        return;
+    }
+
+
+    return "checkedpic";
+}
+
+function do_cancelPic() {
+    if($("#uploads_input").val().length === 0) {
+        swal({
+            title: "您还没有选择文件",
+            icon: "error",
+        });
+        return;
+    }
+    $("#uploads_input").val("");
+    $("#uploaded_pic_name").val("");
+}
+
+
+
+
+
+/* video */
+function do_exec_upload() {
+    // console.log(pic_size_toupload)
+    var result = getFileinfomation();
+    if(result != "checkedvideo") {
+        swal({
+            title: "请选择正确的文件",
+            icon: "error",
+        });
+        return;
+    }
+    jQuery.fcup_upload();
+}
+
+function getFileinfomation() {
+    // var filex = document.getElementById("uploadx_input").files;
+    var filex = jQuery('#uploadx_input')[0].files;
+    console.log(filex);
+    //校验是否存在文件
+    if(filex.length === 0){
+        swal({
+            title: "请上传或刷新页面后重试",
+            icon: "error",
+        });
+        return;
+    }else if (filex.length != 1) {
+        swal({
+            title: "您只可以上传一个文件",
+            icon: "error",
+        });
+        return;
+    }
+    var filex_type = filex[0].type.split("/")[1]; //文件类型JPG,JPEG,RAW
+    var filex_size = filex[0].size / 1024 / 1024; //文件大小MB
+    var filex_name = filex[0].name;
+    $("#uploaded_video_name").val(filex_name);
+
+    if (!((filex_type === "mp4") || (filex_type === "MP4") || (filex_type === "mov") || (filex_type === "MOV"))) {
+        swal({
+            title: "只允许上传mp4或mov格式的文件",
+            icon: "error",
+        });
+        $("#uploadx_input").val("");
+        $("#uploaded_video_name").val("");
+        return;
+    }
+
+    if ((filex_size < 2000) && (filex_size > 1)) {
+        swal({
+            title: "文件大小不得超过2G",
+            icon: "error",
+        });
+        $("#uploadx_input").val("");
+        $("#uploaded_video_name").val("");
+        return;
+    }
+
+
+    return "checkedvideo";
+}
+
+function do_cancel() {
+    if($("#uploadx_input").val().length === 0) {
+        swal({
+            title: "您还没有选择文件",
+            icon: "error",
+        });
+        return;
+    }
+    $("#uploadx_input").val("");
+    $("#uploaded_video_name").val("");
+}
+
+function toPercent(point) {
+    var str = Number(point).toFixed(2);
+    str += "%";
+    return str;
 }

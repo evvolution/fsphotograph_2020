@@ -1,12 +1,3 @@
-/*
- * 文件分段上传jquery插件
- * author: lovefc
- * blog: http://lovefc.cn
- * time: 2018/01/05 23:05
- * uptime: 2018/05/02 0:36
- * uptime: 2019/05/21 17:12
- * 分离了原来的进度动画，现在用户可以自定义自己的动画和按钮，分别提供了各种回调事件以便处理
- */
 
 var fcup_upload = {
     fcup: function (config) {
@@ -79,6 +70,7 @@ var fcup_upload = {
         var result = '';
         jQuery.upError = '';
         var file = jQuery('#' + jQuery.upInputId)[0].files[0];
+        // console.log('video', file)
         if (!file) {
             return false;
         }
@@ -87,8 +79,41 @@ var fcup_upload = {
         }
         name = file.name;
         video_name_toupload = name; /*----------------------------把文件名放在页面上*/
-        
         size = file.size;
+        video_size_toupload = size; /*----------------------------把文件大小放在页面上*/
+
+        var typex = file.type.split("/")[1];
+        if (!((typex === "mp4") || (typex === "MP4") || (typex === "mov") || (typex === "MOV"))) {
+            swal({
+                title: "只允许上传mp4或mov格式的文件",
+                icon: "error",
+            });
+            $("#uploadx_input").val("");
+            $("#uploaded_video_name").val("");
+            return;
+        }
+        video_type_toupload = typex;
+
+        var sizex = parseInt((size / 1024 / 1024));
+        // console.log(sizex)
+        if (sizex === 0) {
+            swal({
+                title: "非有效文件！",
+                icon: "error",
+            });
+            $("#uploadx_input").val("");
+            $("#uploaded_video_name").val("");
+            return;
+        }else if (((sizex > 2000) || (sizex < 1))) {
+            swal({
+                title: "文件大小不得超过2G",
+                icon: "error",
+            });
+            $("#uploadx_input").val("");
+            $("#uploaded_video_name").val("");
+            return;
+        }
+
         index1 = name.lastIndexOf(".");
         if (!jQuery.upShardSize) {
             jQuery.upShardSize = 2;
@@ -188,30 +213,6 @@ var fcup_upload = {
         re = null,
             file = null;
     },
-    get_file_md5: function (file) {
-        var blobSlice = File.prototype.slice || File.prototype.mozSlice || File.prototype.webkitSlice,
-            chunkSize = jQuery.upShardSize,
-            chunks = Math.ceil(file.size / chunkSize),
-            currentChunk = 0,
-            spark = new SparkMD5.ArrayBuffer(),
-            frOnload = function (e) {
-                spark.append(e.target.result); // append array buffer
-                currentChunk++;
-                if (currentChunk < chunks) loadNext();
-            },
-            frOnerror = function () { };
-
-        function loadNext() {
-            var fileReader = new FileReader();
-            fileReader.onload = frOnload;
-            fileReader.onerror = frOnerror;
-            var start = currentChunk * chunkSize,
-                end = ((start + chunkSize) >= file.size) ? file.size : start + chunkSize;
-            fileReader.readAsArrayBuffer(blobSlice.call(file, start, end));
-        };
-        loadNext();
-        return spark.end();
-    }
 };
 
 
@@ -286,6 +287,7 @@ var fcup_upload_pic = {
         var result = '';
         jQuery.upError_pic = '';
         var file = jQuery('#' + jQuery.upInputId_pic)[0].files[0];
+        // console.log('pic', file)
         if (!file) {
             return false;
         }
@@ -295,6 +297,39 @@ var fcup_upload_pic = {
         name = file.name;
         pic_name_toupload = name;/*----------------------------把文件名放在页面上*/
         size = file.size;
+        pic_size_toupload = size / 1024 / 1024;/*----------------------------把文件大小放在页面上*/
+        
+        var types = file.type.split("/")[1];
+        if (!((types === "JPG") || (types === "jpg") || (types === "JPEG") || (types === "jpeg") || (types === "RAW") || (types === "raw"))) {
+            swal({
+                title: "只允许上传jpg,jpeg或raw格式的文件",
+                icon: "error",
+            });
+            $("#uploads_input").val("");
+            $("#uploaded_pic_name").val("");
+            return;
+        }
+        pic_type_toupload = types;
+        var sizes = parseInt((size / 1024 / 1024));
+        if(sizes === 0) {
+            swal({
+                title: "非有效文件",
+                icon: "error",
+            });
+            $("#uploads_input").val("");
+            $("#uploaded_pic_name").val("");
+            return;
+        }else if (((sizes > 20) || (sizes < 2))) {
+            swal({
+                title: "文件大小需在2M-20M之间",
+                icon: "error",
+            });
+            $("#uploads_input").val("");
+            $("#uploaded_pic_name").val("");
+            return;
+        }
+
+
         index1 = name.lastIndexOf(".");
         if (!jQuery.upShardSize_pic) {
             jQuery.upShardSize_pic = 2;
@@ -392,32 +427,8 @@ var fcup_upload_pic = {
         }
         ajaxStack(re);
         re = null,
-            file = null;
+        file = null;
     },
-    // get_file_md5_pic: function (file) {
-    //     var blobSlice = File.prototype.slice || File.prototype.mozSlice || File.prototype.webkitSlice,
-    //         chunkSize = jQuery.upShardSize,
-    //         chunks = Math.ceil(file.size / chunkSize),
-    //         currentChunk = 0,
-    //         spark = new SparkMD5.ArrayBuffer(),
-    //         frOnload = function (e) {
-    //             spark.append(e.target.result); // append array buffer
-    //             currentChunk++;
-    //             if (currentChunk < chunks) loadNext();
-    //         },
-    //         frOnerror = function () { };
-
-    //     function loadNext() {
-    //         var fileReader = new FileReader();
-    //         fileReader.onload = frOnload;
-    //         fileReader.onerror = frOnerror;
-    //         var start = currentChunk * chunkSize,
-    //             end = ((start + chunkSize) >= file.size) ? file.size : start + chunkSize;
-    //         fileReader.readAsArrayBuffer(blobSlice.call(file, start, end));
-    //     };
-    //     loadNext();
-    //     return spark.end();
-    // }
 };
 
 

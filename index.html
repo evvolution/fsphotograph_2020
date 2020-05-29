@@ -10,7 +10,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="plugins/bootstrap/bootstrap.min.css"> -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="plugins/fullpage/fullpage.min.css">
-    <link rel="stylesheet" type="text/css" href="plugins/fileinput/fileinput.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="plugins/fileinput/fileinput.min.css"> -->
     <link rel="stylesheet" type="text/css" href="plugins/litestep/step.css">
     
     <link rel="stylesheet" type="text/css" href="control/css/basic.css">
@@ -74,19 +74,21 @@
                             <div class="row p3rowlevel2">
                                 <div class="container"><br/>
                                     <div class="row p3rowlevel3">
-                                        <p class="reqtitleinp3">在线报名</p>
-                                    </div>
-                                    <div class="row p3rowlevel3">
-                                        <p class="reqintroinp3">在线上传作品并填写下面信息，填写完毕后上传。</p>
+                                        <p class="reqintroinp3">在线上传作品并填写下面信息，填写完毕后上传。推荐分辨率1920*1080</p>
                                     </div>
                                     <div class="row p3rowlevel3">
                                         <div id="step"></div>
                                     </div>
                                     <div class="row p3rowlevel3">
                                         <div class="lock"></div>
-                                        <div class="col-lg-6 offset-lg-3">
+                                        <div class="col-lg-8 offset-lg-2">
                                             <form method="post" enctype="multipart/form-data" id="maininformation">
                                                 <div class="liteswitch boxTxt">
+<!-- 
+                                                    <div class="box">
+                                                        21323
+                                                    </div> -->
+
                                                     <div class="box">
                                                         <input name="exam_id" type="text" value="32" style="display: none;"/>
                                                         <div class="row p3rowlevel4">
@@ -123,18 +125,26 @@
                                                         <div class="row p3rowlevel4" id="forvideoprj" style="line-height: 2vw;">
                                                             <div class="col-md-3 infolabel">上传作品: </div>
                                                             <div class="col-md-9 upload_big">
-                                                                <button class="bigfile_btn" id="uploadx">立即上传</button>
-                                                                <span id="uploaded_video_name"></span>
+                                                                <button class="bigfile_btn" id="uploadx">选择文件</button>
+                                                                <input id="uploaded_video_name" class="uploaded_video_name" type="text" readonly/>
+                                                                <!-- <div class="bigfile_btn_cancelUpload" id="bigfile_btn_cancelUpload" onclick="do_cancel()"><span>清除</span></div>
+                                                                <div class="bigfile_btn_execUpload" id="bigfile_btn_execUpload" onclick="do_exec_upload()"><span>上传</span></div> -->
                                                                 <input id="video_name_target_id" name="target_id" type="text" value="" style="display: none;"/>
+                                                                <input id="uploaded_video_type" style="display: none;"/>
+                                                                <input id="videofinalname" name="ffile" style="display: none;"/>
                                                             </div>
                                                         </div>
 
                                                         <div class="row p3rowlevel4" style="line-height: 2vw;">
                                                             <div class="col-md-3 infolabel" id="forvideopostprj">上传封面: </div>
                                                             <div class="col-md-9 upload_big">
-                                                                <button class="bigfile_btn_pic" id="uploads">立即上传</button>
-                                                                <span id="uploaded_pic_name"></span>
+                                                                <button class="bigfile_btn_pic" id="uploads">选择文件</button>
+                                                                <input id="uploaded_pic_name" class="uploaded_pic_name" type="text" readonly/>
+                                                                <!-- <div class="bigfile_btn_cancelUpload" id="bigfile_btn_cancelUpload_pic" onclick="do_cancelPic()"><span>清除</span></div>
+                                                                <div class="bigfile_btn_execUpload" id="bigfile_btn_execUpload_pic" onclick="do_execPic_upload()"><span>上传</span></div> -->
                                                                 <input id="pic_name_target_id" name="target_id" type="text" value="" style="display: none;"/>
+                                                                <input id="uploaded_pic_type" style="display: none;"/>
+                                                                <input id="picfinalname" name="fimg" style="display: none;"/>
                                                             </div>
                                                         </div>
 
@@ -227,14 +237,11 @@
                                                         <div class="row p3rowlevel4">
                                                             <div class="col-md-12">
                                                                 <input class="prjread" type="checkbox" id="read">&nbsp;
-                                                                <label class="labelprjread" for="read">
-                                                                    本人已详细阅读并熟知本<a data-toggle="modal" data-target="#prjnotice"><strong>报名须知(点击查看)</strong></a>，并承诺严格遵守
-                                                                </label>
+                                                                <label class="labelprjread" for="read">本人已详细阅读并熟知本<a data-toggle="modal" data-target="#prjnotice"><strong>报名须知(点击查看)</strong></a>，并承诺严格遵守</label>
                                                             </div>
                                                         </div>
-                                                        
                                                         <div class="row p3rowlevel4">
-                                                            <!-- <div class="col"></div> -->
+                                                            <div class="col"></div>
                                                             <div class="col">
                                                                 <div id="finalpre" class="preandnext" onclick=steppre() >← 上一步</div>
                                                             </div>
@@ -242,7 +249,7 @@
                                                                 <div class="preandnext" onclick=submitinfo() id="finalsubmit">提交</div>
                                                                 <div class="finalsubmitted" style="display: none;">已提交</div>
                                                             </div>
-                                                            <!-- <div class="col"></div> -->
+                                                            <div class="col"></div>
                                                         </div>
                                                     </div>       
                                                 </div>
@@ -333,7 +340,7 @@
         </div>
     </div>
 
-    <div class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" id="ajaxprocess_modal" data-backdrop="static">
+    <div class="modal" tabindex="-1" role="dialog" aria-hidden="true" id="ajaxprocess_modal" data-backdrop="static">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -347,7 +354,7 @@
         </div>
     </div>
 
-    <div class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" id="video_process_modal" data-backdrop="static">
+    <div class="modal" tabindex="-1" role="dialog" aria-hidden="true" id="video_process_modal" data-backdrop="static">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -361,7 +368,7 @@
         </div>
     </div>
 
-    <div class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" id="pic_process_modal" data-backdrop="static">
+    <div class="modal" tabindex="-1" role="dialog" aria-hidden="true" id="pic_process_modal" data-backdrop="static">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -375,7 +382,7 @@
         </div>
     </div>
 
-    <div class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" id="UploadBIGsuccee_modal" data-backdrop="static">
+    <div class="modal" tabindex="-1" role="dialog" aria-hidden="true" id="UploadBIGsuccee_modal" data-backdrop="static">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -398,8 +405,8 @@
     <!-- <script type="text/javascript" src="plugins/bootstrap/bootstrap.min.js"></script> -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="plugins/fullpage/fullpage.min.js"></script>
-    <script type="text/javascript" src="plugins/fileinput/fileinput.min.js"></script>
-    <script type="text/javascript" src="plugins/fileinput/zh.js"></script>
+    <!-- <script type="text/javascript" src="plugins/fileinput/fileinput.min.js"></script> -->
+    <!-- <script type="text/javascript" src="plugins/fileinput/zh.js"></script> -->
     <script type="text/javascript" src="plugins/liteswitch/liteswitch3.js"></script>
     <script type="text/javascript" src="plugins/liteswitch/liteswitch5.js"></script>
     <script type="text/javascript" src="plugins/litestep/step.js"></script>

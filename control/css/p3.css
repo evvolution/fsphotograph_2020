@@ -24,7 +24,7 @@
 }
 
 .p3row {
-    margin-bottom: 2vw;
+    margin: 0.5vw 0; 
 }
 
 #step {
@@ -36,7 +36,7 @@
 }
 
 .p3rowlevel3 {
-    margin-bottom: 0.2vw; 
+    margin-bottom: 0.1vw; 
 }
 
 .p3rowlevel3_bottom {
@@ -45,12 +45,12 @@
 
 .p3rowlevel3 p {
     text-align: justify;
-    font-size: 1vw;
-    margin-bottom: 0.5vw; 
+    font-size: 0.8w;
+    margin-bottom: 1.5vw; 
 }
 
 .p3rowlevel4 {
-    margin: 1vw 0; 
+    margin: 0.5vw 0; 
 }
 
 .infolabel {
@@ -217,38 +217,94 @@
 }
 
 .upload_big {
-    text-align: left;
+    display: flex;
 }
 
-.upload_big span {
-    position: absolute;
-    left: 170px;
-    color: #31a242;
-    font-size: 13px;
-}
 
 .bigfile_btn_pic {
-    background-color: #31a242;
+    background-color: #247d3c;
     border-radius: 5px;
-    color: #fff;
-    font-size: 1vw;
-    width: 130px;
+    color: #feed4d;
+    font-size: 0.9vw;
+    line-height: 2.5vw;
     cursor: pointer;
-    position: absolute;
     outline: none;
     border: 0;
+    flex: 1;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .bigfile_btn {
-    background-color: #31a242;
+    background-color: #247d3c;
     border-radius: 5px;
-    color: #fff;
-    font-size: 1vw;
-    width: 130px;
+    color: #feed4d;
+    font-size: 0.9vw;
+    line-height: 2.5vw;
     cursor: pointer;
-    position: absolute;
     outline: none;
     border: 0;
+    flex: 1;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.uploaded_video_name {
+    flex: 3;
+    outline: none;
+    border: 0;
+    font-size: 0.8vw;
+    background-color: whitesmoke;
+    padding: 0 0.5vw;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.uploaded_pic_name {
+    flex: 3;
+    outline: none;
+    border: 0;
+    font-size: 0.8vw;
+    background-color: whitesmoke;
+    padding: 0 0.5vw;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.bigfile_btn_execUpload {
+    background-color: yellowgreen;
+    color: #fff;
+    font-size: 0.9vw;
+    border-radius: 5px;
+    outline: none;
+    border: 0;
+    flex: 1;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    cursor: pointer;
+}
+
+.bigfile_btn_cancelUpload {
+    background-color: grey;
+    color: #fff;
+    font-size: 0.9vw;
+    outline: none;
+    border: 0;
+    flex: 1;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    cursor: pointer;
+}
+
+.bigfile_btn_execUpload span{
+    margin: 0 auto;
+    line-height: 2.5vw;
+}
+
+.bigfile_btn_cancelUpload span{
+    margin: 0 auto;
+    line-height: 2.5vw;
+    
 }
 
 #mustknown {
@@ -275,4 +331,5 @@
     text-align: center;
     margin-top: 20px;
     font-size: 15px;
+    cursor: pointer;
 }
